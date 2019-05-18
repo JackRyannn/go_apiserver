@@ -50,19 +50,23 @@ func Get(c *gin.Context) {
 
 type TextResponseBody struct {
 	XMLName      xml.Name `xml:"xml"`
-	ToUserName   string
-	FromUserName string
+	ToUserName   CDATA
+	FromUserName CDATA
 	CreateTime   time.Duration
-	MsgType      string
-	Content      string
+	MsgType      CDATA
+	Content      CDATA
+}
+
+type CDATA struct {
+	Text string `xml:",cdata"`
 }
 
 func makeTextResponseBody(fromUserName, toUserName, content string) ([]byte, error) {
 	textResponseBody := &TextResponseBody{}
-	textResponseBody.FromUserName = fromUserName
-	textResponseBody.ToUserName = toUserName
-	textResponseBody.MsgType = "text"
-	textResponseBody.Content = content
+	textResponseBody.FromUserName = CDATA{fromUserName}
+	textResponseBody.ToUserName = CDATA{toUserName}
+	textResponseBody.MsgType = CDATA{"text"}
+	textResponseBody.Content = CDATA{content}
 	textResponseBody.CreateTime = time.Duration(time.Now().Unix())
 	return xml.MarshalIndent(textResponseBody, " ", "  ")
 }
