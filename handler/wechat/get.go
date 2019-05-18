@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/lexkong/log"
 	"io"
-	"io/ioutil"
 	"sort"
 	"strings"
 )
@@ -28,8 +27,6 @@ func makeSignature(timestamp, nonce string) string { //本地计算signature
 
 // Get gets an user by the user identifier.
 func Get(c *gin.Context) {
-	body, _ := ioutil.ReadAll(c.Request.Body)
-	log.Info("---body/--- \r\n " + string(body))
 
 	timestamp := c.Query("timestamp")
 	nonce := c.Query("nonce")
@@ -46,5 +43,11 @@ func Get(c *gin.Context) {
 
 		SendResponseWithoutFormat(c, echostr)
 	}
+
+}
+func Post(c *gin.Context) {
+	buf := make([]byte, 1024)
+	n, _ := c.Request.Body.Read(buf)
+	log.Info(string(buf[0:n]))
 
 }

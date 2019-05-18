@@ -50,6 +50,7 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 	w := g.Group("/procSignature")
 	{
 		w.GET("", wechat.Get)
+		w.POST("", wechat.Post)
 	}
 	return g
 }
