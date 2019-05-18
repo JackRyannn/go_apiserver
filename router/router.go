@@ -2,6 +2,7 @@ package router
 
 import (
 	"apiserver/handler/story"
+	"apiserver/handler/wechat"
 	"net/http"
 
 	"apiserver/handler/sd"
@@ -46,6 +47,9 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 	{
 		s.GET("", story.Get)
 	}
-
+	w := g.Group("/procSignature")
+	{
+		w.GET("", wechat.Get)
+	}
 	return g
 }
