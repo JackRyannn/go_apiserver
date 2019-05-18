@@ -2,6 +2,7 @@ package wechat
 
 import (
 	. "apiserver/handler"
+	"apiserver/service"
 	"crypto/sha1"
 	"encoding/xml"
 	"fmt"
@@ -74,13 +75,13 @@ func makeTextResponseBody(fromUserName, toUserName, content string) ([]byte, err
 func Post(c *gin.Context) {
 	buf := make([]byte, 1024)
 	n, _ := c.Request.Body.Read(buf)
-	log.Info(string(buf[0:n]))
-	var event TextResponseBody
-	msg := c.PostForm("msg")
+	msg := string(buf[0:n])
 	log.Info(msg)
+	var event TextResponseBody
 	xml.Unmarshal([]byte(msg), &event)
 	fmt.Println(event)
-	ret, _ := makeTextResponseBody("JackRyannn", "renchao", "this is answer")
+	content := service.Receive(event.Content.Text)
+	ret, _ := makeTextResponseBody(event.ToUserName.Text, event.FromUserName.Text, content)
 	SendResponseWithoutFormat(c, string(ret))
 
 }
