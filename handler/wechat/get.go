@@ -3,11 +3,13 @@ package wechat
 import (
 	. "apiserver/handler"
 	"crypto/sha1"
+	"encoding/xml"
 	"fmt"
 	"github.com/lexkong/log"
 	"io"
 	"sort"
 	"strings"
+	"time"
 )
 
 import "github.com/gin-gonic/gin"
@@ -45,9 +47,31 @@ func Get(c *gin.Context) {
 	}
 
 }
+
+type TextResponseBody struct {
+	XMLName      xml.Name `xml:"xml"`
+	ToUserName   string
+	FromUserName string
+	CreateTime   time.Duration
+	MsgType      string
+	Content      string
+}
+
+func makeTextResponseBody(fromUserName, toUserName, content string) ([]byte, error) {
+	textResponseBody := &TextResponseBody{}
+	textResponseBody.FromUserName = fromUserName
+	textResponseBody.ToUserName = toUserName
+	textResponseBody.MsgType = "text"
+	textResponseBody.Content = content
+	textResponseBody.CreateTime = time.Duration(time.Now().Unix())
+	return xml.MarshalIndent(textResponseBody, " ", "  ")
+}
+
 func Post(c *gin.Context) {
 	buf := make([]byte, 1024)
 	n, _ := c.Request.Body.Read(buf)
 	log.Info(string(buf[0:n]))
+	ret, _ := makeTextResponseBody("JackRyannn", "renchao", "this is answer")
+	SendResponseWithoutFormat(c, string(ret))
 
 }
