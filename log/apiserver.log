@@ -1,0 +1,46 @@
+{"level":"INFO","timestamp":"2019-05-15 16:58:43.342","file":"apiserver/main.go:60","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-15 16:58:43.346","file":"apiserver/main.go:57","msg":"The router has been deployed successfully."}
+{"level":"INFO","timestamp":"2019-05-15 17:06:31.986","file":"config/config.go:71","msg":"Config file changed: /Users/renchao/mygo/src/apiserver/conf/config.yaml"}
+{"level":"INFO","timestamp":"2019-05-15 17:07:07.216","file":"apiserver/main.go:65","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-15 17:07:07.217","file":"apiserver/main.go:62","msg":"The router has been deployed successfully."}
+{"level":"INFO","timestamp":"2019-05-15 17:12:24.808","file":"apiserver/main.go:65","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-15 17:12:24.809","file":"apiserver/main.go:62","msg":"The router has been deployed successfully."}
+{"level":"DEBUG","timestamp":"2019-05-15 17:13:11.888","file":"user/create.go:26","msg":"username is: [admin], password is []"}
+{"level":"INFO","timestamp":"2019-05-15 17:32:56.164","file":"apiserver/main.go:65","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-15 17:32:56.165","file":"apiserver/main.go:79","msg":"Waiting for the router, retry in 1 second."}
+{"level":"INFO","timestamp":"2019-05-15 17:32:57.168","file":"apiserver/main.go:62","msg":"The router has been deployed successfully."}
+{"level":"INFO","timestamp":"2019-05-15 17:34:06.546","file":"user/create.go:16","msg":"User Create function called.","data":{"X-Request-Id":""}}
+{"level":"INFO","timestamp":"2019-05-17 14:48:53.215","file":"apiserver/main.go:69","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-17 14:48:53.218","file":"apiserver/main.go:83","msg":"Waiting for the router, retry in 1 second."}
+{"level":"INFO","timestamp":"2019-05-17 14:48:54.221","file":"apiserver/main.go:66","msg":"The router has been deployed successfully."}
+{"level":"INFO","timestamp":"2019-05-17 16:06:22.002","file":"apiserver/main.go:69","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-17 16:06:22.002","file":"apiserver/main.go:83","msg":"Waiting for the router, retry in 1 second."}
+{"level":"INFO","timestamp":"2019-05-17 16:06:23.005","file":"apiserver/main.go:66","msg":"The router has been deployed successfully."}
+{"level":"INFO","timestamp":"2019-05-17 16:15:28.525","file":"apiserver/main.go:69","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-17 16:15:28.534","file":"apiserver/main.go:66","msg":"The router has been deployed successfully."}
+{"level":"INFO","timestamp":"2019-05-17 16:30:45.834","file":"apiserver/main.go:69","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-17 16:30:45.840","file":"apiserver/main.go:66","msg":"The router has been deployed successfully."}
+{"level":"ERROR","timestamp":"2019-05-18 11:15:23.731","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"ERROR","timestamp":"2019-05-18 11:15:23.732","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"INFO","timestamp":"2019-05-18 11:15:23.732","file":"apiserver/main.go:69","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-18 11:15:23.732","file":"apiserver/main.go:66","msg":"The router has been deployed successfully."}
+{"level":"ERROR","timestamp":"2019-05-18 11:32:10.149","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"ERROR","timestamp":"2019-05-18 11:32:10.150","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"INFO","timestamp":"2019-05-18 11:32:10.150","file":"apiserver/main.go:69","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-18 11:32:10.150","file":"apiserver/main.go:66","msg":"The router has been deployed successfully."}
+{"level":"ERROR","timestamp":"2019-05-18 11:33:38.509","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"ERROR","timestamp":"2019-05-18 11:33:38.509","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"INFO","timestamp":"2019-05-18 11:33:38.509","file":"apiserver/main.go:69","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-18 11:33:38.509","file":"apiserver/main.go:66","msg":"The router has been deployed successfully."}
+{"level":"ERROR","timestamp":"2019-05-18 11:36:11.487","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"ERROR","timestamp":"2019-05-18 11:36:11.487","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"INFO","timestamp":"2019-05-18 11:36:11.487","file":"apiserver/main.go:69","msg":"Start to listening the incoming requests on http address: :8080"}
+{"level":"INFO","timestamp":"2019-05-18 11:36:11.488","file":"apiserver/main.go:66","msg":"The router has been deployed successfully."}
+{"level":"ERROR","timestamp":"2019-05-18 11:38:34.504","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"ERROR","timestamp":"2019-05-18 11:38:34.504","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"INFO","timestamp":"2019-05-18 11:38:34.504","file":"apiserver/main.go:69","msg":"Start to listening the incoming requests on http address: :80"}
+{"level":"INFO","timestamp":"2019-05-18 11:38:34.504","file":"apiserver/main.go:70","msg":"listen tcp :80: bind: address already in use"}
+{"level":"ERROR","timestamp":"2019-05-18 11:40:47.747","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"ERROR","timestamp":"2019-05-18 11:40:47.747","file":"model/init.go:32","msg":"Database connection failed. Database name: db_apiserver","data":{"error":"dial tcp 127.0.0.1:3306: connect: connection refused"}}
+{"level":"INFO","timestamp":"2019-05-18 11:40:47.747","file":"apiserver/main.go:69","msg":"Start to listening the incoming requests on http address: :80"}
+{"level":"INFO","timestamp":"2019-05-18 11:40:47.748","file":"apiserver/main.go:66","msg":"The router has been deployed successfully."}
