@@ -4,6 +4,7 @@ import (
 	. "apiserver/handler"
 	"crypto/sha1"
 	"fmt"
+	"github.com/lexkong/log"
 	"io"
 	"sort"
 	"strings"
@@ -26,12 +27,16 @@ func makeSignature(timestamp, nonce string) string { //本地计算signature
 
 // Get gets an user by the user identifier.
 func Get(c *gin.Context) {
+
 	timestamp := c.Query("timestamp")
 	nonce := c.Query("nonce")
 	signature := c.Query("signature")
 	echostr := c.Query("echostr")
 
 	signatureGen := makeSignature(timestamp, nonce)
+
+	log.Infof("WeChat ProcSignature Param : timestamp=%s,nonce=%s,signature=%s,echostr=%s,signatureGen=%s", timestamp, nonce, signature, echostr, signatureGen)
+
 	if signature != signatureGen {
 		SendResponse(c, nil, false)
 	} else {
