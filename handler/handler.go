@@ -27,5 +27,5 @@ func SendResponse(c *gin.Context, err error, data interface{}) {
 
 func SendResponseWithoutFormat(c *gin.Context, data string) {
 	// always return http.StatusOK
-	c.JSON(http.StatusOK, data)
+	c.String(200, data)
 }
