@@ -75,6 +75,11 @@ func Post(c *gin.Context) {
 	buf := make([]byte, 1024)
 	n, _ := c.Request.Body.Read(buf)
 	log.Info(string(buf[0:n]))
+	var event TextResponseBody
+	msg := c.PostForm("msg")
+	log.Info(msg)
+	xml.Unmarshal([]byte(msg), &event)
+	fmt.Println(event)
 	ret, _ := makeTextResponseBody("JackRyannn", "renchao", "this is answer")
 	SendResponseWithoutFormat(c, string(ret))
 
