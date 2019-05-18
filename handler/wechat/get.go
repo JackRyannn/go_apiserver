@@ -40,7 +40,8 @@ func Get(c *gin.Context) {
 	if signature != signatureGen {
 		SendResponse(c, nil, false)
 	} else {
-		SendResponse(c, nil, echostr)
+
+		SendResponseWithoutFormat(c, echostr)
 	}
 
 }
