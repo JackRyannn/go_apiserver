@@ -13,9 +13,6 @@ type Response struct {
 	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
 }
-type Response2 struct {
-	Data interface{} `json:"echostr"`
-}
 
 func SendResponse(c *gin.Context, err error, data interface{}) {
 	code, message := errno.DecodeErr(err)
@@ -30,7 +27,5 @@ func SendResponse(c *gin.Context, err error, data interface{}) {
 
 func SendResponseWithoutFormat(c *gin.Context, data string) {
 	// always return http.StatusOK
-	c.JSON(http.StatusOK, Response2{
-		Data: data,
-	})
+	c.JSON(http.StatusOK, data)
 }
