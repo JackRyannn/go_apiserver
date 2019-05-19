@@ -103,7 +103,7 @@ func Foo(i string) string {
 			"我挣扎着起身，问医生：\n" +
 			"A.大夫，小珺还好吗？\n" +
 			"B.大夫，我的妻子呢？"
-	//	A
+	//	C
 	case "11":
 		ret = "他用手一指，我的妻子，正靠在门边，面色冰冷地看着我。\n" +
 			"“我第三天就发现你不对了。”她说。\n" +
@@ -133,7 +133,7 @@ func Receive(c string) string {
 		Step = 0
 		return "游戏结束"
 	}
-	answer := "AABBBABCAAB"
+	answer := "AABBBABCAABC"
 	if Step == len(answer)+1 || (c != "A" && c != "B" && c != "C") || !Flag {
 		return "开始游戏请输入start"
 	}

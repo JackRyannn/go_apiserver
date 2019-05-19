@@ -2,7 +2,6 @@ package model
 
 import (
 	"fmt"
-
 	"github.com/lexkong/log"
 	"github.com/spf13/viper"
 	// MySQL driver.
