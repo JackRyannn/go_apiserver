@@ -80,7 +80,16 @@ func Post(c *gin.Context) {
 	var event TextResponseBody
 	xml.Unmarshal([]byte(msg), &event)
 	fmt.Println(event)
-	content := service.Receive(event.Content.Text)
+	key := event.Content.Text
+	content := ""
+	// Get the user by the `username` from the database.
+	if strings.Contains(key, "getShareText") {
+		content = service.GetShareText()
+	} else if strings.Contains(key, "setShareText") {
+		content = service.SetShareText(key)
+	} else {
+		content = service.Receive(key)
+	}
 	ret, _ := makeTextResponseBody(event.ToUserName.Text, event.FromUserName.Text, content)
 	SendResponseWithoutFormat(c, string(ret))
 
