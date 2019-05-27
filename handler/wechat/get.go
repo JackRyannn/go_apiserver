@@ -87,9 +87,15 @@ func Post(c *gin.Context) {
 		content = service.GetShareText()
 	} else if strings.Contains(key, "setShareText") {
 		content = service.SetShareText(key)
+	} else if strings.Contains(key, "readDiary") {
+		date := strings.Split(key, "-")[1]
+		content = service.GetDiaryText(date)
+	} else if strings.Contains(key, "writeDiary") {
+		content = service.SetDiaryText(key)
 	} else {
 		content = service.Receive(key)
 	}
+
 	ret, _ := makeTextResponseBody(event.ToUserName.Text, event.FromUserName.Text, content)
 	SendResponseWithoutFormat(c, string(ret))
 
