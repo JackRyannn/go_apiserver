@@ -135,7 +135,7 @@ func Receive(c string) string {
 		return "游戏结束"
 	}
 	answer := "AABBBABCAABC"
-	if Step == len(answer)+1 || (c != "A" && c != "B" && c != "C") || !Flag {
+	if Step == len(answer) || (c != "A" && c != "B" && c != "C") || !Flag {
 		Step = 0
 		return "开始游戏请输入start"
 	}
