@@ -18,7 +18,7 @@ func Get(c *gin.Context) {
 	} else if strings.Contains(key, "setShareText") {
 		ret = service.SetShareText(key)
 	} else {
-		ret = service.Receive(key)
+		ret = service.Receive("10001", key)
 	}
 
 	SendResponse(c, nil, ret)
