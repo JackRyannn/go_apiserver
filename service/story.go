@@ -1,11 +1,23 @@
 package service
 
 import (
+	"fmt"
+	"runtime"
 	"strconv"
+	"time"
 )
 
+type User struct {
+	id   string
+	flag bool
+	ch   chan string
+}
+
+var userList []*User
+var TIMEOUT = time.Second * 10
 var Step = 0
 var Flag = false
+var ch_ret chan string
 
 func Foo(i string) string {
 	var ret string
@@ -124,7 +136,39 @@ func Foo(i string) string {
 
 	return ret
 }
-func Receive(c string) string {
+
+func (user *User) createRoutine() {
+	fmt.Println("Create", user.id)
+	user.ch = make(chan string)
+	Step = 0
+	Flag = false
+	go func() {
+		for {
+			select {
+			case content := <-user.ch:
+				ch_ret <- run(content)
+			case <-time.After(TIMEOUT):
+				close(user.ch)
+				user.flag = false
+				runtime.Goexit()
+			}
+		}
+	}()
+
+}
+func (user *User) sendMsg(content string) {
+	fmt.Println("Send", user.id)
+	if user.flag {
+		user.ch <- content
+	} else {
+		fmt.Println("has been closed")
+		user.createRoutine()
+		user.flag = true
+		user.sendMsg(content)
+	}
+}
+
+func run(c string) string {
 	if c == "start" {
 		Flag = true
 		return Foo("0")
@@ -149,4 +193,19 @@ func Receive(c string) string {
 		return Foo("-1")
 	}
 
+}
+
+func Receive(id string, s string) string {
+	ch_ret = make(chan string)
+	for _, i := range userList {
+		if i.id == id {
+			i.sendMsg(s)
+			return <-ch_ret
+		}
+	}
+	user := &User{id, true, nil}
+	userList = append(userList, user)
+	user.createRoutine()
+	user.sendMsg(s)
+	return <-ch_ret
 }

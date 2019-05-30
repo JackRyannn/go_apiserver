@@ -81,6 +81,7 @@ func Post(c *gin.Context) {
 	xml.Unmarshal([]byte(msg), &event)
 	fmt.Println(event)
 	key := event.Content.Text
+	w_id := event.FromUserName.Text
 	content := ""
 	// Get the user by the `username` from the database.
 	if strings.Contains(key, "getShareText") {
@@ -93,7 +94,7 @@ func Post(c *gin.Context) {
 	} else if strings.Contains(key, "writeDiary") {
 		content = service.SetDiaryText(key)
 	} else {
-		content = service.Receive(key)
+		content = service.Receive(w_id, key)
 	}
 
 	ret, _ := makeTextResponseBody(event.ToUserName.Text, event.FromUserName.Text, content)
