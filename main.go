@@ -60,7 +60,7 @@ func main() {
 		middlewares...,
 	)
 	//加载templates下的web页面
-	g.LoadHTMLGlob("templates/*")
+	g.LoadHTMLGlob("templates/html/*")
 
 	// Ping the server to make sure the router is working.
 	go func() {

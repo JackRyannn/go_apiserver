@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 引用css文件，不指定charset会失效 -->
+    <link rel="stylesheet" type="text/css" href="/templates/mystyle.css" charset="UTF-8"/>
+    <link rel="stylesheet" href="/templates/layui/css/layui.css"/>
+    <!-- 从Microsoft加载jquery -->
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+    <script type="text/javascript" src="/templates/myjs.js"></script>
+    <script src="/templates/layui/layui.all.js"></script>
+    <meta charset="UTF-8"></meta>
+    <title>我的主界面</title>
+</head>
+<body>
+
+<!--导航栏-->
+<div id="nav-placeholder"></div>
+
+<div id="div1"><h2>使用 jQuery AJAX 来改变文本</h2></div>
+<button id="button1">获得外部内容</button>
+
+<form onsubmit="return false" id="formAddtr" method="get">
+    <input type="text" name="id"/>
+    <button id="select1" onclick="subForm()">查询</button>
+</form>
+
+<table id="table_user" class="bordered">
+    <thead>
+    <th>ID</th>
+    <th>用户名</th>
+    <th>sayHello</th>
+    <th>密码</th>
+    <th>创建时间</th>
+    <th>修改时间</th>
+    <th>操作</th>
+    </thead>
+    <tbody id="body_user">
+    </tbody>
+</table>
+
+</body>
+</html>

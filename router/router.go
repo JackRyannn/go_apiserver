@@ -66,6 +66,15 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 				"title": "Main website",
 			})
 		})
+		h.GET("/nav", func(context *gin.Context) {
+			context.HTML(http.StatusOK, "nav.html", gin.H{})
+		})
+		h.GET("/user", func(context *gin.Context) {
+			context.HTML(http.StatusOK, "user.tmpl", gin.H{})
+		})
+		h.GET("/product", func(context *gin.Context) {
+			context.HTML(http.StatusOK, "product.tmpl", gin.H{})
+		})
 	}
 
 	return g

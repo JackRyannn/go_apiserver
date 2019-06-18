@@ -1,3 +1,17 @@
+//添加导航栏
+$(function(){
+    $("#nav-placeholder").load("nav");
+});
+//添加导航栏监听
+layui.use('element', function(){
+    var element = layui.element;
+    element.on('nav(chaoren-nav)', function(elem){
+        console.log(elem); //得到当前点击的DOM对象
+        alert(elem);
+    });
+    //…
+});
+
 //刷新表格
 function subForm() {
     $.ajax({
@@ -28,7 +42,7 @@ function subForm() {
                     "<td>"+$password + "</td>" +
                     "<td>"+$createTime + "</td>" +
                     "<td>"+$updateTime + "</td>" +
-                    "<td><button id='btn_update' onclick='update("+$id+",\""+$username+"\",\""+$password+"\",\""+$updateTime+"\")'>更新</button></td>" +
+                    "<td><button class='layui-btn layui-btn-sm' id='btn_update' onclick='update("+$id+",\""+$username+"\",\""+$password+"\",\""+$updateTime+"\")'>更新</button></td>" +
                     "</tr>";
                 $("#body_user").append(str1);
             }
@@ -72,7 +86,7 @@ function subForm2() {
                     "<td>"+$updateTime + "</td>" +
                     "<td>"+$state + "</td>" +
                     "<td>"+$pic + "</td>" +
-                    "<td><button id='btn_update'>更新</button></td>" +
+                    "<td><button class='layui-btn layui-btn-sm' id='btn_update'>更新</button></td>" +
                     "</tr>";
                 $("#body_product").append(str1);
             }
@@ -102,3 +116,4 @@ function update(id,username,password,updateTime) {
         }
     });
 }
+
