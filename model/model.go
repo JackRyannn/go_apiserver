@@ -21,9 +21,26 @@ type UserInfo struct {
 	UpdatedAt string `json:"updatedAt"`
 }
 
+type ProductInfo struct {
+	Id          uint64 `json:"id"`
+	Name        string `json:"name"`
+	Author      string `json:"author"`
+	Intro       string `json:"intro"`
+	Label       string `json:"label"`
+	Create_Time string `json:"create_time"`
+	Update_Time string `json:"update_time"`
+	State       int    `json:"state"`
+	Pic         string `json:"pic"`
+}
+
 type UserList struct {
 	Lock  *sync.Mutex
 	IdMap map[uint64]*UserInfo
+}
+
+type ProductList struct {
+	Lock  *sync.Mutex
+	IdMap map[uint64]*ProductInfo
 }
 
 // Token represents a JSON web token.

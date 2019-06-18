@@ -1,11 +1,11 @@
 package service
 
+//service这一层主要做一些复杂逻辑的处理，是业务层，介于接入层和数据存储层（ORM）之间
 import (
-	"fmt"
-	"sync"
-
 	"apiserver/model"
 	"apiserver/util"
+	"fmt"
+	"sync"
 )
 
 func ListUser(username string, offset, limit int) ([]*model.UserInfo, uint64, error) {
@@ -67,6 +67,67 @@ func ListUser(username string, offset, limit int) ([]*model.UserInfo, uint64, er
 
 	for _, id := range ids {
 		infos = append(infos, userList.IdMap[id])
+	}
+
+	return infos, count, nil
+}
+
+func ListProduct(name string, offset, limit int) ([]*model.ProductInfo, uint64, error) {
+	infos := make([]*model.ProductInfo, 0)
+	products, count, err := model.ListProduct(name, offset, limit)
+	if err != nil {
+		return nil, count, err
+	}
+
+	ids := []uint64{}
+	for _, product := range products {
+		ids = append(ids, product.Id)
+	}
+
+	wg := sync.WaitGroup{}
+	productList := model.ProductList{
+		Lock:  new(sync.Mutex),
+		IdMap: make(map[uint64]*model.ProductInfo, len(products)),
+	}
+
+	errChan := make(chan error, 1)
+	finished := make(chan bool, 1)
+
+	// Improve query efficiency in parallel
+	for _, u := range products {
+		wg.Add(1)
+		go func(u *model.ProductModel) {
+			defer wg.Done()
+
+			productList.Lock.Lock()
+			defer productList.Lock.Unlock()
+			productList.IdMap[u.Id] = &model.ProductInfo{
+				Id:          u.Id,
+				Name:        u.Name,
+				Author:      u.Author,
+				Intro:       u.Intro,
+				Label:       u.Label,
+				Create_Time: u.Create_Time.Format("2006-01-02 15:04:05"),
+				Update_Time: u.Update_Time.Format("2006-01-02 15:04:05"),
+				State:       u.State,
+				Pic:         u.Pic,
+			}
+		}(u)
+	}
+
+	go func() {
+		wg.Wait()
+		close(finished)
+	}()
+
+	select {
+	case <-finished:
+	case err := <-errChan:
+		return nil, count, err
+	}
+
+	for _, id := range ids {
+		infos = append(infos, productList.IdMap[id])
 	}
 
 	return infos, count, nil

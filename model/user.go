@@ -33,8 +33,8 @@ func DeleteUser(id uint64) error {
 }
 
 // Update updates an user account information.
-func (u *UserModel) Update() error {
-	return DB.Self.Save(u).Error
+func (u *UserModel) Update(new *UserModel) error {
+	return DB.Self.Model(u).Update(new).Error
 }
 
 // GetUser gets an user by the user identifier.

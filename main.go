@@ -4,6 +4,7 @@ import (
 	"apiserver/config"
 	"apiserver/model"
 	"apiserver/router"
+	"apiserver/router/middleware"
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -46,17 +47,20 @@ func main() {
 
 	// Create the Gin engine.
 	g := gin.New()
-
+	g.Static("/templates", "./templates")
+	//添加和加载中间件，但是logging本身就实现了，其实去掉也没差
 	middlewares := []gin.HandlerFunc{}
-
+	middlewares = append(middlewares, middleware.Logging())
 	// Routes.
 	router.Load(
 		// Cores.
 		g,
-
+		//middleware.Logging(),
 		// Middlwares.
 		middlewares...,
 	)
+	//加载templates下的web页面
+	g.LoadHTMLGlob("templates/*")
 
 	// Ping the server to make sure the router is working.
 	go func() {
@@ -67,14 +71,14 @@ func main() {
 	}()
 
 	log.Infof("Start to listening the incoming requests on http address: %s", ":80")
-	log.Infof(http.ListenAndServe(":80", g).Error())
+	log.Infof(http.ListenAndServe(":8080", g).Error())
 }
 
 // pingServer pings the http server to make sure the router is working.
 func pingServer() error {
 	for i := 0; i < 2; i++ {
 		// Ping the server by sending a GET request to `/health`.
-		resp, err := http.Get("http://127.0.0.1:80" + "/sd/health")
+		resp, err := http.Get("http://127.0.0.1:8080" + "/sd/health")
 		if err == nil && resp.StatusCode == 200 {
 			return nil
 		}

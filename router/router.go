@@ -1,6 +1,7 @@
 package router
 
 import (
+	"apiserver/handler/product"
 	"apiserver/handler/story"
 	"apiserver/handler/wechat"
 	"net/http"
@@ -34,6 +35,11 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 		u.GET("/:username", user.Get)
 	}
 
+	p := g.Group("/v1/product")
+	{
+		p.GET("", product.List)
+	}
+
 	// The health check handlers
 	svcd := g.Group("/sd")
 	{
@@ -52,5 +58,15 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 		w.GET("", wechat.Get)
 		w.POST("", wechat.Post)
 	}
+
+	h := g.Group("/")
+	{
+		h.GET("/main", func(context *gin.Context) {
+			context.HTML(http.StatusOK, "main.tmpl", gin.H{
+				"title": "Main website",
+			})
+		})
+	}
+
 	return g
 }

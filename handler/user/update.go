@@ -21,7 +21,7 @@ func Update(c *gin.Context) {
 
 	// Binding the user data.
 	var u model.UserModel
-	if err := c.Bind(&u); err != nil {
+	if err := c.BindJSON(&u); err != nil {
 		SendResponse(c, errno.ErrBind, nil)
 		return
 	}
@@ -42,7 +42,7 @@ func Update(c *gin.Context) {
 	}
 
 	// Save changed fields.
-	if err := u.Update(); err != nil {
+	if err := u.Update(&u); err != nil {
 		SendResponse(c, errno.ErrDatabase, nil)
 		return
 	}
