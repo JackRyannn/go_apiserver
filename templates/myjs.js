@@ -2,15 +2,15 @@
 $(function(){
     $("#nav-placeholder").load("nav");
 });
-//添加导航栏监听
-layui.use('element', function(){
-    var element = layui.element;
-    element.on('nav(chaoren-nav)', function(elem){
-        console.log(elem); //得到当前点击的DOM对象
-        alert(elem);
-    });
-    //…
-});
+// //添加导航栏监听
+// layui.use('element', function(){
+//     var element = layui.element;
+//     element.on('nav(chaoren-nav)', function(elem){
+//         console.log(elem); //得到当前点击的DOM对象
+//         alert(elem);
+//     });
+//     //…
+// });
 
 //刷新表格
 function subForm() {
@@ -102,18 +102,29 @@ $(document).ready(function(){
 
 //更新updateTime，更新完后刷新表格
 function update(id,username,password,updateTime) {
-    $.ajax({
-        url: 'http://localhost:8080/v1/user/'+id, //请求的url
-        type: 'put', //请求的方式
-        dateType:'json',
-        data: '{"username":"'+username+'","password":"'+password+'","updatedAt":"'+updateTime+'"}',
-        // data: '?id='+id+'&username='+username+'&deletedAt='+'&password='+password+'&createTime='+createTime+'&updatedAt='+updateTime, //form表单里要提交的内容，里面的input等写上name就会提交，这是序列化
-        error:function (data) {
-            alert('请求失败');
-        },
-        success:function (data) {
-            subForm()
-        }
+    layui.use('layer', function(){
+        var layer = layui.layer;
+
+        layer.open({
+            title:"配置详情",
+            type:2,
+            content:"http://localhost:8080/user_config",
+            area: ['500px', '600px']
+        })
     });
+
+    // $.ajax({
+    //     url: 'http://localhost:8080/v1/user/'+id, //请求的url
+    //     type: 'put', //请求的方式
+    //     dateType:'json',
+    //     data: '{"username":"'+username+'","password":"'+password+'","updatedAt":"'+updateTime+'"}',
+    //     // data: '?id='+id+'&username='+username+'&deletedAt='+'&password='+password+'&createTime='+createTime+'&updatedAt='+updateTime, //form表单里要提交的内容，里面的input等写上name就会提交，这是序列化
+    //     error:function (data) {
+    //         alert('请求失败');
+    //     },
+    //     success:function (data) {
+    //         subForm()
+    //     }
+    // });
 }
 

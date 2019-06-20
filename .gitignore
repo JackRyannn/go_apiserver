@@ -1,2 +1,5 @@
 /.idea
 /log
+.idea/workspace.xml
+*.log
+templates/.DS_Store
