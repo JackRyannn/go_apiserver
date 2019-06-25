@@ -132,3 +132,64 @@ func ListProduct(name string, offset, limit int) ([]*model.ProductInfo, uint64, 
 
 	return infos, count, nil
 }
+
+func ListTag(name string, offset, limit int) ([]*model.TagInfo, uint64, error) {
+	infos := make([]*model.TagInfo, 0)
+	tags, count, err := model.ListTag(name, offset, limit)
+	if err != nil {
+		return nil, count, err
+	}
+
+	ids := []uint64{}
+	for _, tag := range tags {
+		ids = append(ids, tag.Id)
+	}
+
+	wg := sync.WaitGroup{}
+	tagList := model.TagList{
+		Lock:  new(sync.Mutex),
+		IdMap: make(map[uint64]*model.TagInfo, len(tags)),
+	}
+
+	errChan := make(chan error, 1)
+	finished := make(chan bool, 1)
+
+	// Improve query efficiency in parallel
+	for _, u := range tags {
+		wg.Add(1)
+		go func(u *model.TagModel) {
+			defer wg.Done()
+
+			tagList.Lock.Lock()
+			defer tagList.Lock.Unlock()
+			tagList.IdMap[u.Id] = &model.TagInfo{
+				Id:          u.Id,
+				Name:        u.Name,
+				Source:      u.Source,
+				Category:    u.Category,
+				Property:    u.Property,
+				Create_Time: u.Create_Time.Format("2006-01-02 15:04:05"),
+				Update_Time: u.Update_Time.Format("2006-01-02 15:04:05"),
+				Status:      u.State,
+				Operator:    u.Operator,
+			}
+		}(u)
+	}
+
+	go func() {
+		wg.Wait()
+		close(finished)
+	}()
+
+	select {
+	case <-finished:
+	case err := <-errChan:
+		return nil, count, err
+	}
+
+	for _, id := range ids {
+		infos = append(infos, tagList.IdMap[id])
+	}
+
+	return infos, count, nil
+}

@@ -33,6 +33,18 @@ type ProductInfo struct {
 	Pic         string `json:"pic"`
 }
 
+type TagInfo struct {
+	Id          uint64 `json:"id"`
+	Name        string `json:"name"`
+	Source      string `json:"source"`
+	Category    uint64 `json:"category"`
+	Property    uint64 `json:"property"`
+	Status      uint64 `json:"status"`
+	Create_Time string `json:"create_time"`
+	Update_Time string `json:"update_time"`
+	Operator    string `json:"operator"`
+}
+
 type UserList struct {
 	Lock  *sync.Mutex
 	IdMap map[uint64]*UserInfo
@@ -41,6 +53,11 @@ type UserList struct {
 type ProductList struct {
 	Lock  *sync.Mutex
 	IdMap map[uint64]*ProductInfo
+}
+
+type TagList struct {
+	Lock  *sync.Mutex
+	IdMap map[uint64]*TagInfo
 }
 
 // Token represents a JSON web token.

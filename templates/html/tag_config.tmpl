@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--    <link rel="stylesheet" type="text/css" href="/templates/mystyle.css" charset="UTF-8"/>-->
+    <link rel="stylesheet" href="/templates/layui/css/layui.css" media="all">
+    <!-- 从Microsoft加载jquery -->
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+<!--    这里必须加载layui.js，如果用all.js就会显示不出来select等-->
+    <script src="/templates/layui/layui.js"></script>
+    <script>
+        //Demo
+        layui.use('form', function () {
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+
+                layer.msg(JSON.stringify(data.field));
+                $.ajax({
+                    url: 'http://localhost:8080/v1/tag/', //请求的url
+                    type: 'post', //请求的方式
+                    dateType:'json',
+                    data: JSON.stringify(data.field),
+                    error:function (data) {
+                        layer.msg("创建失败")
+
+                    },
+                    success:function (data) {
+                        // layer.msg("创建Tag成功")
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<form class="layui-form" action="create_tag">
+    <div class="layui-form-item">
+        <label class="layui-form-label">标签名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" lay-verify="required" placeholder="玄幻" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">来源</label>
+        <div class="layui-input-inline">
+            <input type="text" name="source" lay-verify="required" placeholder="企鹅号" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">辅助文字</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">分类</label>
+        <div class="layui-input-inline">
+            <select name="category" lay-verify="required">
+                <option value=""></option>
+                <option value="0">动漫</option>
+                <option value="1">漫画</option>
+                <option value="2">同人文</option>
+                <option value="3">Cosplay</option>
+                <option value="4">电竞</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">属性</label>
+        <div class="layui-input-inline">
+            <select name="property" lay-verify="required">
+                <option value=""></option>
+                <option value="0">德莱文</option>
+                <option value="1">女枪</option>
+                <option value="2">女警</option>
+                <option value="3">麦林炮手</option>
+                <option value="4">圣枪游侠</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">标签有效期</label>
+            <div class="layui-input-inline"> <!-- 注意：这一层元素并不是必须的 -->
+                <input type="text" class="layui-input" name="close_time" id="close_time" autocomplete="off"/>
+            </div>
+        <div class="layui-form-mid layui-word-aux">非必填项</div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+<!--             lay-filter="*" 这个可以清空表单-->
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#close_time', //指定元素
+            type: "datetime"
+        });
+    });
+    
+    function create_tag() {
+        
+    }
+</script>
+</body>
+
+
+</html>
+
+

@@ -16,39 +16,28 @@
 <!--导航栏-->
 <div id="nav-placeholder"></div>
 
-<div id="div1"><h2>使用 jQuery AJAX 来改变文本</h2></div>
-<button id="button1">获得外部内容</button>
-<script>
-    layui.use('laydate', function(){
-        var laydate = layui.laydate;
-
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#close_time', //指定元素
-            type: "datetime"
-        });
-    });
-</script>
-<label class="layui-form-label">标签有效期</label>
-<input type="text" class="layui-input" id="close_time"/>
-<form onsubmit="return false" id="formAddtr" method="get">
+<form onsubmit="return false" id="formAddtr2" method="get">
     <input type="text" name="id"/>
-    <button id="select1" onclick="subForm_user()">查询</button>
+    <button class="layui-btn" id="select2" onclick="subForm_tag()">查询</button>
+    <button class="layui-btn" id="create_tag" onclick="call_create_tag()">创建Tag</button>
+
 </form>
 
-<table id="table_user" class="bordered">
+<table id="table_tag" class="bordered">
     <thead>
     <th>ID</th>
-    <th>用户名</th>
-    <th>sayHello</th>
-    <th>密码</th>
+    <th>标签名</th>
+    <th>来源</th>
+    <th>分类</th>
+    <th>属性</th>
+    <th>状态</th>
     <th>创建时间</th>
-    <th>修改时间</th>
+    <th>更新时间</th>
+    <th>操作人</th>
     <th>操作</th>
     </thead>
-    <tbody id="body_user">
+    <tbody id="body_tag">
     </tbody>
 </table>
-
 </body>
 </html>

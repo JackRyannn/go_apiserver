@@ -3,6 +3,7 @@ package router
 import (
 	"apiserver/handler/product"
 	"apiserver/handler/story"
+	"apiserver/handler/tag"
 	"apiserver/handler/wechat"
 	"net/http"
 
@@ -40,6 +41,12 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 		p.GET("", product.List)
 	}
 
+	tt := g.Group("/v1/tag")
+	{
+		tt.GET("", tag.List)
+		tt.POST("", tag.Create)
+	}
+
 	// The health check handlers
 	svcd := g.Group("/sd")
 	{
@@ -75,9 +82,19 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 		h.GET("/product", func(context *gin.Context) {
 			context.HTML(http.StatusOK, "product.tmpl", gin.H{})
 		})
+		h.GET("/tag", func(context *gin.Context) {
+			context.HTML(http.StatusOK, "tag.tmpl", gin.H{})
+		})
 		h.GET("/user_config", func(context *gin.Context) {
 			context.HTML(http.StatusOK, "user_config.tmpl", gin.H{})
 		})
+		h.GET("/tag_config", func(context *gin.Context) {
+			context.HTML(http.StatusOK, "tag_config.tmpl", gin.H{})
+		})
+		h.GET("/test", func(context *gin.Context) {
+			context.HTML(http.StatusOK, "test.tmpl", gin.H{})
+		})
+
 	}
 
 	return g
