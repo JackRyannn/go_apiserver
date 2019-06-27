@@ -10,16 +10,15 @@ import (
 // 定义model及包含的字段
 //注意这里首字母必须大写，否则匹配不上
 type TagModel struct {
-	Id          uint64
-	Name        string
-	Source      string
-	Category    uint64
-	Property    uint64
-	State       uint64
-	Create_Time time.Time
-	Update_Time time.Time
-	Close_Time  time.Time
-	Operator    string
+	BaseModel
+	Name     string `gorm:"column:name"`
+	Source   string `gorm:"column:source;default:'企鹅号'"`
+	Category uint64 `gorm:"column:category"`
+	Property uint64 `gorm:"column:property"`
+	State    uint64 `gorm:"column:state"`
+	//这里用指针才能修改CloseAt的值
+	ClosedAt *time.Time `gorm:"column:close_time;null" json:"-"`
+	Operator string     `gorm:"column:operator;default:'admin'"`
 }
 
 //设置该model从属的表名

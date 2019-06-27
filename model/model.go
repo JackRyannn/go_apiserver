@@ -7,9 +7,9 @@ import (
 
 type BaseModel struct {
 	Id        uint64     `gorm:"primary_key;AUTO_INCREMENT;column:id" json:"-"`
-	CreatedAt time.Time  `gorm:"column:createdAt" json:"-"`
-	UpdatedAt time.Time  `gorm:"column:updatedAt" json:"-"`
-	DeletedAt *time.Time `gorm:"column:deletedAt" sql:"index" json:"-"`
+	CreatedAt time.Time  `gorm:"column:create_time" json:"-"`
+	UpdatedAt time.Time  `gorm:"column:update_time;null" json:"-"`
+	DeletedAt *time.Time `gorm:"column:delete_time;null"  sql:"index" json:"-"`
 }
 
 type UserInfo struct {

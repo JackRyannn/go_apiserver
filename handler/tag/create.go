@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/lexkong/log"
 	"github.com/lexkong/log/lager"
+	"strconv"
 	"time"
 )
 
@@ -15,21 +16,25 @@ import (
 func Create(c *gin.Context) {
 	log.Info("User Create function called.", lager.Data{"X-Request-Id": util.GetReqID(c)})
 	var r CreateRequest
-	if err := c.Bind(&r); err != nil {
+	if err := c.BindJSON(&r); err != nil {
+		log.Info(errno.ErrBind.Message)
 		SendResponse(c, errno.ErrBind, nil)
 		return
 	}
-	print("chaoren:" + r.Close_Time.String())
+	closeTime, _ := time.Parse("2006-01-02 15:04:05", "2019-06-26 00:00:00")
+	log.Info("chaoren1:" + r.Name + r.Source + r.ClosedAt)
+	//将string类型转换为uint64
+	category, _ := strconv.ParseUint(r.Category, 12, 64)
+	property, _ := strconv.ParseUint(r.Property, 12, 64)
+	state, _ := strconv.ParseUint(r.State, 12, 64)
 	u := model.TagModel{
-		Name:        r.Name,
-		Source:      r.Source,
-		Category:    r.Category,
-		Property:    r.Property,
-		State:       r.State,
-		Create_Time: time.Now(),
-		Update_Time: time.Now(),
-		Close_Time:  r.Close_Time,
-		Operator:    r.Operator,
+		Name:     r.Name,
+		Source:   r.Source,
+		Category: category,
+		Property: property,
+		State:    state,
+		ClosedAt: &closeTime,
+		Operator: r.Operator,
 	}
 
 	// Validate the data.
@@ -45,6 +50,7 @@ func Create(c *gin.Context) {
 	//}
 	// Insert the user to the database.
 	if err := u.Create(); err != nil {
+		log.Info("chaoren: " + err.Error())
 		SendResponse(c, errno.ErrDatabase, nil)
 		return
 	}

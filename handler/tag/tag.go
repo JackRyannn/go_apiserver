@@ -2,17 +2,23 @@ package tag
 
 import (
 	"apiserver/model"
-	"time"
+)
+
+const (
+	STATE_DOWN = 0
+	STATE_UP   = 1
+	STATE_DEL  = 2
 )
 
 type CreateRequest struct {
-	Name       string    `json:"name"`
-	Source     string    `json:"source"`
-	Category   uint64    `json:"category"`
-	Property   uint64    `json:"property"`
-	State      uint64    `json:"state"`
-	Close_Time time.Time `json:"close_time"`
-	Operator   string    `json:"operator"`
+	//接口传来的值都是string类型，再自己转换
+	Name     string `json:"name"`
+	Source   string `json:"source"`
+	Category string `json:"category"`
+	Property string `json:"property"`
+	State    string `json:"state"`
+	ClosedAt string `json:"close_time"`
+	Operator string `json:"operator"`
 }
 
 type CreateResponse struct {

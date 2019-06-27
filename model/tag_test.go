@@ -14,7 +14,7 @@ func TestGetTagById(t *testing.T) {
 		fmt.Println("wrong")
 		fmt.Println(err)
 	}
-	fmt.Println("chaoren=", p.Id, p.Name, p.Create_Time, p.Source)
+	fmt.Println("chaoren=", p.Id, p.Name, p.CreatedAt, p.Source)
 }
 
 func TestListTag(t *testing.T) {
@@ -34,19 +34,19 @@ func TestListTag(t *testing.T) {
 func TestCreateTag(t *testing.T) {
 	defer DB.Close()
 	initConfigAndDatabase()
-	tag := TagModel{
-		Name:        "测试",
-		Source:      "百家号",
-		Category:    9,
-		Property:    10,
-		State:       0,
-		Create_Time: time.Now(),
-		Update_Time: time.Now(),
 
+	temp_time := time.Now()
+
+	tag := TagModel{
+		Name:     "测试",
+		Source:   "百家号",
+		Category: 9,
+		Property: 10,
+		State:    0,
+		ClosedAt: &temp_time,
 		Operator: "admin",
 	}
 	print(time.Now().String())
-	print(tag.Close_Time.String())
 	err := tag.Create()
 	if err != nil {
 		t.Error(err)

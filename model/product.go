@@ -3,21 +3,18 @@ package model
 import (
 	"apiserver/pkg/constvar"
 	"fmt"
-	"time"
 )
 
 // 定义model及包含的字段
 //注意这里首字母必须大写，否则匹配不上
 type ProductModel struct {
-	Id          uint64
-	Name        string
-	Author      string
-	Intro       string
-	Label       string
-	Create_Time time.Time
-	Update_Time time.Time
-	State       int
-	Pic         string
+	BaseModel
+	Name   string
+	Author string
+	Intro  string
+	Label  string
+	State  int
+	Pic    string
 }
 
 //设置该model从属的表名

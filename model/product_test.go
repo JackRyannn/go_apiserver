@@ -13,7 +13,7 @@ func TestGetProductById(t *testing.T) {
 		fmt.Println("wrong")
 		fmt.Println(err)
 	}
-	fmt.Println("chaoren=", p.Id, p.Name, p.Create_Time, p.Author)
+	fmt.Println("chaoren=", p.Name, p.Author)
 }
 
 func TestListProduct(t *testing.T) {
