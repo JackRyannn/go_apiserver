@@ -39,7 +39,7 @@ type TagInfo struct {
 	Source      string `json:"source"`
 	Category    uint64 `json:"category"`
 	Property    uint64 `json:"property"`
-	Status      uint64 `json:"status"`
+	State       uint64 `json:"state"`
 	Create_Time string `json:"create_time"`
 	Update_Time string `json:"update_time"`
 	Operator    string `json:"operator"`

@@ -170,7 +170,7 @@ func ListTag(name string, offset, limit int) ([]*model.TagInfo, uint64, error) {
 				Property:    u.Property,
 				Create_Time: u.CreatedAt.Format("2006-01-02 15:04:05"),
 				Update_Time: u.UpdatedAt.Format("2006-01-02 15:04:05"),
-				Status:      u.State,
+				State:       u.State,
 				Operator:    u.Operator,
 			}
 		}(u)

@@ -45,6 +45,8 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 	{
 		tt.GET("", tag.List)
 		tt.POST("", tag.Create)
+		tt.PUT("/:id", tag.Update)
+
 	}
 
 	// The health check handlers

@@ -48,7 +48,7 @@ function subForm_tag() {
                     "<td>"+$createTime + "</td>" +
                     "<td>"+$updateTime + "</td>" +
                     "<td>"+$operator + "</td>" +
-                    "<td><button class='layui-btn layui-btn-sm' id='btn_update' onclick='update()'>同步</button><button class='layui-btn layui-btn-sm' id='btn_up'>上架</button><button class='layui-btn layui-btn-sm' id='btn_update'>下架</button></td>" +
+                    "<td><button class='layui-btn layui-btn-sm' id='btn_update' onclick='update()'>同步</button><button class='layui-btn layui-btn-sm' id='btn_up' onclick='update($id,1)'>上架</button><button class='layui-btn layui-btn-sm' id='btn_update' onclick='update($id,2)'>下架</button><button class='layui-btn layui-btn-sm' id='btn_update' onclick='update($id,3)'>删除</button></td>" +
                     "</tr>";
                 $("#body_tag").append(str1);
             }
@@ -76,31 +76,22 @@ function call_create_tag() {
     });
 }
 
-//更新updateTime，更新完后刷新表格
-function update(id,username,password,updateTime) {
-    layui.use('layer', function(){
-        var layer = layui.layer;
-
-        layer.open({
-            title:"配置详情",
-            type:2,
-            content:"http://localhost:8080/user_config",
-            area: ['500px', '600px']
-        })
+//更新state，更新完后刷新表格
+function update(id,state) {
+    alert(id)
+    $.ajax({
+        url: 'http://localhost:8080/v1/tag/'+id, //请求的url
+        type: 'put', //请求的方式
+        dateType:'json',
+        data: '{"state":"'+state+'"}',
+        error:function (data) {
+            alert('请求失败');
+        },
+        success:function (data) {
+            subForm_tag()
+        }
     });
 
-    // $.ajax({
-    //     url: 'http://localhost:8080/v1/user/'+id, //请求的url
-    //     type: 'put', //请求的方式
-    //     dateType:'json',
-    //     data: '{"username":"'+username+'","password":"'+password+'","updatedAt":"'+updateTime+'"}',
-    //     // data: '?id='+id+'&username='+username+'&deletedAt='+'&password='+password+'&createTime='+createTime+'&updatedAt='+updateTime, //form表单里要提交的内容，里面的input等写上name就会提交，这是序列化
-    //     error:function (data) {
-    //         alert('请求失败');
-    //     },
-    //     success:function (data) {
-    //         subForm()
-    //     }
-    // });
+
 }
 

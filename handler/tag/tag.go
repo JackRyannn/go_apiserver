@@ -1,16 +1,18 @@
 package tag
 
+//这里保存的结构体是为了接口入参和出参，需要自己再构造gorm里的struct
 import (
 	"apiserver/model"
 )
 
 const (
-	STATE_DOWN = 0
+	// 0 在 gorm里是空白值，不会更新，因此不要设置0
 	STATE_UP   = 1
 	STATE_DEL  = 2
+	STATE_DOWN = 3
 )
 
-type CreateRequest struct {
+type TagRequest struct {
 	//接口传来的值都是string类型，再自己转换
 	Name     string `json:"name"`
 	Source   string `json:"source"`

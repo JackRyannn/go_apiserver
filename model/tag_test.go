@@ -55,3 +55,17 @@ func TestCreateTag(t *testing.T) {
 	}
 
 }
+
+func TestTagModel_Update(t *testing.T) {
+	defer DB.Close()
+	initConfigAndDatabase()
+	tagModel := TagModel{
+		Name: "jay",
+		BaseModel: BaseModel{
+			Id: 0,
+		},
+		State: 3,
+	}
+	err := tagModel.Update(&tagModel)
+	fmt.Println(err)
+}

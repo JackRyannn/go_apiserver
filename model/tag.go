@@ -57,6 +57,11 @@ func ListTag(name string, offset, limit int) ([]*TagModel, uint64, error) {
 	return tags, count, nil
 }
 
+// Update updates an user account information.
+func (u *TagModel) Update(new *TagModel) error {
+	return DB.Self.Model(u).Update(new).Error
+}
+
 // Validate the fields.
 func (u *TagModel) Validate() error {
 	validate := validator.New()

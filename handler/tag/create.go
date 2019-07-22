@@ -15,7 +15,7 @@ import (
 // Create creates a new user account.
 func Create(c *gin.Context) {
 	log.Info("User Create function called.", lager.Data{"X-Request-Id": util.GetReqID(c)})
-	var r CreateRequest
+	var r TagRequest
 	if err := c.BindJSON(&r); err != nil {
 		log.Info(errno.ErrBind.Message)
 		SendResponse(c, errno.ErrBind, nil)
